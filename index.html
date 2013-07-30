@@ -6,7 +6,7 @@
     <title>Discoproject.github.io by discoproject</title>
 
     <link rel="stylesheet" href="stylesheets/styles.css">
-    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <link rel="stylesheet" href="stylesheets/googlecode.css">
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
     <!--[if lt IE 9]>
     <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -15,24 +15,227 @@
   <body>
     <div class="wrapper">
       <header>
-        <h1>Discoproject.github.io</h1>
-        <p></p>
-
-
-        <p class="view"><a href="https://github.com/discoproject">View My GitHub Profile</a></p>
-
+        <h1>Disco</h1>
+        <h2>massive data - minimal code</h2>
+        <img src="images/diagram.png"></img>
+        <ul>
+            <li><a href="http://disco.readthedocs.org/en/latest/start/download.html">
+                Get Disco
+            </a></li>
+            <li><a href="https://github.com/discoproject/disco/">
+                GitHub repository
+            </a></li>
+            <li><a href="https://groups.google.com/forum/#!forum/disco-dev">
+                Google Group
+            </a></li>
+            <li>
+                <a href="http://disco.readthedocs.org">Documentation</a>
+                <ul>
+                    <li><a href="http://disco.readthedocs.org/en/latest/start/tutorial.html">
+                        Tutorial
+                    </a></li>
+                    <li><a href="http://disco.readthedocs.org/en/latest/start/install.html">
+                        Cluster setup
+                    </a></li>
+                    <li><a href="http://disco.readthedocs.org/en/latest/faq.html">
+                        FAQ
+                    </a></li>
+                    <li><a href="http://disco.readthedocs.org/en/latest/lib/">
+                        API Reference
+                    </a></li>
+                    <li><a href="http://disco.readthedocs.org/en/latest/screenshots.html">
+                        Screenshots
+                    </a></li>
+                    <li><a href="http://disco.readthedocs.org/en/latest/releases.html">
+                        Release Notes
+                    </a></li>
+                </ul>
+            </li>
+        </ul>
       </header>
       <section>
-        <h3>
-<a name="new-discoprojectorg-is-under-construction" class="anchor" href="#new-discoprojectorg-is-under-construction"><span class="octicon octicon-link"></span></a>New Discoproject.org is under construction</h3>
+        <div class="blurb">
+            <p>
+            Disco is a lightweight, open-source framework for distributed computing based on the <a
+            href="http://en.wikipedia.org/wiki/MapReduce">MapReduce</a>
+            paradigm.
+            </p>
+            <p>
+            Disco is powerful and easy to use, thanks to Python.
+            Disco <a href="http://disco.readthedocs.org/en/latest/howto/ddfs.html">
+            distributes and replicates your data</a>, and <a
+            href="http://disco.readthedocs.org/en/latest/overview.html">
+            schedules your jobs</a>
+            efficiently. Disco even includes the tools you need to <a
+            href="http://discodb.readthedocs.org">
+            index billions
+            of data points and query them in real-time</a>.
+            </p>
+            <p>
+            Disco was born in <a href="http://research.nokia.com">Nokia Research Center</a>
+            in 2008 to solve real challenges in handling massive amounts of data. Disco
+            has been actively developed since then by Nokia and <a href="#users">
+            many other companies</a> who
+            use it for a variety of purposes, such as log analysis, probabilistic
+            modelling, data mining, and full-text indexing.
+            </p>
+        </div>
+        <div class="ebodu">
+            <h2>Disco in action</h2>
+            <pre><code class="python">
+                from disco.core import Job, result_iterator
 
-<p>Stay tuned!</p>
+                def map(line, params):
+                    for word in line.split():
+                        yield word, 1
+
+                def reduce(iter, params):
+                    from disco.util import kvgroup
+                    for word, counts in kvgroup(sorted(iter)):
+                        yield word, sum(counts)
+
+                if __name__ == '__main__':
+                    input = ["http://discoproject.org/media/text/chekhov.txt"]
+                    job = Job().run(input=input, map=map, reduce=reduce)
+                    for word, count in result_iterator(job.wait()):
+                        print word, count
+            </pre></code>
+            <p>
+                This is a fully working Disco script that computes word frequencies in
+                a text corpus. Disco distributes the script automatically to a cluster,
+                so it can utilize all available CPUs in parallel. For details, see
+                <a href="http://disco.readthedocs.org/en/latest/start/tutorial.html">
+                Disco tutorial</a>.
+            </p>
+            <h2>Highlights</h2>
+            <p>
+              <ul id="features">
+
+                <li>
+                  <div class="ftext">
+                    Easy to
+                    <a href="http://disco.readthedocs.org/en/latest/start/install.html">
+                    install</a> on
+                    Linux or Mac OS X and
+                    <a href="http://disco.readthedocs.org/en/latest/start/tutorial.html">
+                    use</a>.
+                  </div>
+                </li>
+
+                <li>
+                  <div class="ftext">
+                    Efficient data-locality-preserving IO,
+                    either over HTTP or the builtin petabyte-scale
+                    <a href="http://disco.readthedocs.org/en/latest/howto/ddfs.html">
+                    Disco Distributed Filesystem</a>.
+                  </div>
+                </li>
+
+                <li>
+                  <div class="ftext">
+                    Supports <a href="http://disco.readthedocs.org/en/latest/faq.html#profiling">
+                    profiling and debugging</a> of mapreduce jobs.
+                  </div>
+                </li>
+
+                <li>
+                  <div class="ftext">
+                    Random access data and auxiliary results through
+                    <a href="http://disco.readthedocs.org/en/latest/howto/oob.html">
+                    out of band results</a>.
+                  </div>
+                </li>
+
+                <li>
+                  <div class="ftext">
+                    Run jobs written in any language using the
+                    <a href="http://disco.readthedocs.org/en/latest/howto/worker.html">
+                    worker protocol</a>.
+                  </div>
+                </li>
+
+                <li>
+                  <div class="ftext">
+                    Build and query indices with billions of keys and values,
+                    using <a href="http://discodb.readthedocs.org">DiscoDB</a>
+                  </div>
+                </li>
+              </ul>
+             ...and more! See the <a href="http://disco.readthedocs.org">
+             documentation</a> for details.
+        </p>
+        <p>
+          Need help with Disco?
+          We can be reached  on our IRC channel
+          <tt>#discoproject</tt> at <a href="http://freenode.net">Freenode</a> or on
+          the <a href="http://groups.google.com/group/disco-dev">Disco discussion group</a>,
+          or by opening an issue at <a href="http://github.com/discoproject/disco">Disco repository at GitHub</a>.
+        </p>
+        <a id="users"><h2>Who is using Disco?</h2></a>
+        <p>
+            Send a note to <a href="http://groups.google.com/group/disco-dev">Disco discussion group</a> if you
+            would like to list your company or project here.
+        </p>
+        <div class="who">
+        <a href="http://www.allstontrading.com"><img src="images/logo_allston_trading.png"></a>
+          <p>
+            Headquartered in Chicago, Illinois, Allston Trading, LLC
+            is a premier high frequency market maker in over 40 financial exchanges,
+            in 20 countries, and in nearly every product class.
+          </p>
+          <p>
+            At Allston Trading, Disco is used for a wide variety of historical research
+            and real-time initiatives in the field of modern finance.
+          </p>
+        </div>
+        <div class="who">
+        <a href="http://www.chango.com"><img src="images/logo_chango.png"></a>
+          <p>
+            Founded by repeat entrepreneurs,
+            Chango is headquartered in Toronto and has offices in New York and Chicago.
+            Chango works with Media Planners and Search Marketers to deliver new customers
+            by targeting dynamic display ads to users based on their recent search activity.
+          </p>
+          <p>
+            Disco is used by Chango as a core component for analyzing and bidding on the ad market.
+          </p>
+        </div>
+        <div class="who">
+          <a href="http://research.nokia.com"><img src="images/logo_nokia.png"></a>
+          <p>
+            Disco is developed mainly at Nokia Research Center (NRC),
+            which is chartered with exploring new frontiers for mobility,
+            and solving challenges to transform the converging Internet and communications industries.
+
+            NRC has been exploring and developing mobile technologies for over 20 years.
+            Current research focuses on the areas of sensing and data intelligence,
+            user interface, high performance mobile platforms, and cognitive radio.
+          </p>
+          <p>
+            The largest data analysis cluster at Nokia runs Disco,
+            to perform daily analysis of Nokia's vast mobile data assets.
+          </p>
+        </div>
+        <div class="who">
+          <a href="http://www.zemanta.com"><img src="images/logo_zemanta.png"></a>
+          <p>
+            Zemanta is developing a content suggestion engine for bloggers and other content creators.
+            Zemanta combs the web for the most relevant images, smart links, keywords and text,
+            instantly serving these results to the user to enrich and inform their content.
+          </p>
+          <p>
+            At Zemanta, Disco is used to process contextual data about
+            images on Wikipedia and Wikimedia Commons.
+          </p>
+        </div>
       </section>
-      <footer>
-        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
-      </footer>
+
+
+
+      <footer></footer>
     </div>
     <script src="javascripts/scale.fix.js"></script>
-    
+    <script src="javascripts/highlight.pack.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
   </body>
 </html>
