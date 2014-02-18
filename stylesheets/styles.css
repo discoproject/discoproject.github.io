@@ -8,27 +8,38 @@ body {
 }
 
 h1, h2, h3, h4, h5, h6 {
-  color:#222;
-  margin:0 0 20px;
+  color:#444;
 }
 
-.who{
+.who {
     margin-top: 30px;
 }
 
-header h2{
-    margin: 0px;
-    color: #8f138b;
-    font-weight: 300;
+header h2 {
+    margin: 5px 0 0;
 }
 
-header h1{
+header h1 {
     margin: 0px;
 }
 
-header ul{
+header ul {
     list-style-type: none;
     padding-left: 15px;
+}
+
+header > ul {
+  padding-left: 0;
+  margin-top: 40px;
+}
+
+header ul li {
+  margin-bottom: 5px;
+}
+
+header > ul > li > ul {
+  margin-top: 5px;
+  padding-left: 20px;
 }
 
 p, ol, table, pre, dl {
@@ -40,11 +51,13 @@ h1, h2, h3 {
 }
 
 h1 {
-  font-size:28px;
+  font-size:36px;
 }
 
 h2 {
-  color:#393939;
+  color:#444;
+  font-weight: 400;
+  margin: 60px 0 15px;
 }
 
 h3, h4, h5, h6 {
@@ -52,9 +65,13 @@ h3, h4, h5, h6 {
 }
 
 a {
-  color:#39c;
+  color: #39c;
   font-weight:400;
   text-decoration:none;
+}
+
+a:hover {
+  color: #1B4B9A;
 }
 
 a small {
@@ -145,30 +162,59 @@ footer {
   bottom:50px;
 }
 
+.blurb {
+  margin-top: 62px;
+}
+
+.who img {
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+.who img:hover {
+  opacity: 0.8;
+}
+
+.allston {
+  height: 64px;
+}
+
+.chango {
+  height: 50px;
+}
+
+.nokia {
+  height: 38px;
+}
+
+.zemanta {
+  height: 50px;
+}
+
 @media print, screen and (max-width: 960px) {
-  
+
   div.wrapper {
     width:auto;
     margin:0;
   }
-  
+
   header, section, footer {
     float:none;
     position:static;
     width:auto;
   }
-  
+
   header {
     padding-right:320px;
   }
-  
+
   section {
     border:1px solid #e5e5e5;
     border-width:1px 0;
     padding:20px 0;
     margin:0 0 20px;
   }
-  
+
   header a small {
     display:inline;
   }
@@ -178,15 +224,15 @@ footer {
   body {
     word-wrap:break-word;
   }
-  
+
   header {
     padding:0;
   }
-  
+
   header p.view {
     position:static;
   }
-  
+
   pre, code {
     word-wrap:normal;
   }
@@ -196,7 +242,7 @@ footer {
   body {
     padding:15px;
   }
-  
+
 }
 
 @media print {
